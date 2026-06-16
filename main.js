@@ -83,15 +83,22 @@ const SVG = {
     '<path id="skw-land" fill="#4CB5AB" d="M111.971,23.82V3.328C84.865-6.96,12.407,11.765,1.419,14.708v9.112H111.971z"/></svg>',
   trees:
     '<svg width="210px" viewBox="0 0 85.04 41.1">' +
-    '<g><rect class="skw-trunk" x="75.121" y="26.724" fill="#8C5F50" width="2.166" height="8.666"/>' +
-    '<rect class="skw-trunk" x="67.539" y="28.89" fill="#8C5F50" width="2.168" height="6.5"/></g>' +
-    '<g><path class="skw-tree" fill="#A0D755" d="M83.785,21.309c0,4.187-3.393,7.581-7.58,7.581s-7.582-3.395-7.582-7.581c0-9.749,3.395-20.579,7.582-20.579S83.785,11.56,83.785,21.309z"/>' +
-    '<path class="skw-tree" fill="#A0D755" d="M75.121,24.933c0,3.382-2.91,6.125-6.5,6.125c-3.588,0-6.498-2.743-6.498-6.125c0-7.873,2.91-16.622,6.498-16.622C72.211,8.311,75.121,17.06,75.121,24.933z"/></g>' +
-    '<g opacity="0.2"><path fill="#FFFFFF" d="M72.955,21.309c0-8.892,1.883-18.68,4.332-20.333c-0.354-0.16-0.715-0.247-1.082-0.247c-4.188,0-7.582,10.83-7.582,20.579c0,4.187,3.395,7.581,7.582,7.581c0.369,0,0.729-0.035,1.082-0.086C74.84,28.277,72.955,25.127,72.955,21.309z"/>' +
-    '<path fill="#FFFFFF" d="M66.457,24.933c0-7.106,1.383-14.901,3.191-16.359c-0.334-0.157-0.676-0.263-1.025-0.263c-3.588,0-6.5,8.749-6.5,16.622c0,3.382,2.912,6.125,6.5,6.125c0.35,0,0.691-0.034,1.025-0.084C67.84,30.508,66.457,27.984,66.457,24.933z"/></g>' +
-    '<g><rect class="skw-trunk" x="3.466" y="35.946" fill="#8C5F50" width="1.475" height="4.424"/>' +
+    // 나무 3그루를 각자 그룹으로(밑동 축 흔들림용 — 원본 path 그대로, 그룹만 분리).
+    // 그루 A(우측 키큰): 밑동·잎·하이라이트.
+    '<g class="skw-tree-sway"><animateTransform attributeName="transform" attributeType="XML" type="rotate" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" values="-3.5 76.2 35.4;3.5 76.2 35.4;-3.5 76.2 35.4" dur="5.5s" repeatCount="indefinite"/>' +
+    '<rect class="skw-trunk" x="75.121" y="26.724" fill="#8C5F50" width="2.166" height="8.666"/>' +
+    '<path class="skw-tree" fill="#A0D755" d="M83.785,21.309c0,4.187-3.393,7.581-7.58,7.581s-7.582-3.395-7.582-7.581c0-9.749,3.395-20.579,7.582-20.579S83.785,11.56,83.785,21.309z"/>' +
+    '<path opacity="0.2" fill="#FFFFFF" d="M72.955,21.309c0-8.892,1.883-18.68,4.332-20.333c-0.354-0.16-0.715-0.247-1.082-0.247c-4.188,0-7.582,10.83-7.582,20.579c0,4.187,3.395,7.581,7.582,7.581c0.369,0,0.729-0.035,1.082-0.086C74.84,28.277,72.955,25.127,72.955,21.309z"/></g>' +
+    // 그루 B(우측 작은).
+    '<g class="skw-tree-sway"><animateTransform attributeName="transform" attributeType="XML" type="rotate" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" values="3.2 68.6 35.4;-3.2 68.6 35.4;3.2 68.6 35.4" dur="6.4s" repeatCount="indefinite"/>' +
+    '<rect class="skw-trunk" x="67.539" y="28.89" fill="#8C5F50" width="2.168" height="6.5"/>' +
+    '<path class="skw-tree" fill="#A0D755" d="M75.121,24.933c0,3.382-2.91,6.125-6.5,6.125c-3.588,0-6.498-2.743-6.498-6.125c0-7.873,2.91-16.622,6.498-16.622C72.211,8.311,75.121,17.06,75.121,24.933z"/>' +
+    '<path opacity="0.2" fill="#FFFFFF" d="M66.457,24.933c0-7.106,1.383-14.901,3.191-16.359c-0.334-0.157-0.676-0.263-1.025-0.263c-3.588,0-6.5,8.749-6.5,16.622c0,3.382,2.912,6.125,6.5,6.125c0.35,0,0.691-0.034,1.025-0.084C67.84,30.508,66.457,27.984,66.457,24.933z"/></g>' +
+    // 그루 C(좌측 작은).
+    '<g class="skw-tree-sway"><rect class="skw-trunk" x="3.466" y="35.946" fill="#8C5F50" width="1.475" height="4.424"/>' +
     '<path class="skw-tree" fill="#A0D755" d="M7.153,34.472c0,1.628-1.32,2.949-2.949,2.949S1.254,36.1,1.254,34.472c0-5.162,1.32-11.799,2.949-11.799S7.153,29.31,7.153,34.472z"/>' +
     '<path opacity="0.2" fill="#FCFCFC" d="M3.466,34.472c0-4.233,0.666-9.452,1.58-11.194c-0.267-0.383-0.55-0.604-0.842-0.604c-1.629,0-2.949,6.637-2.949,11.799c0,1.628,1.32,2.949,2.949,2.949c0.295,0,0.573-0.057,0.842-0.137C4.135,36.919,3.466,35.806,3.466,34.472z"/></g></svg>',
+  // 원본 통짜 path(분리 안 함). 살랑임은 .skw-cat svg 를 아래(앉은 자리) 기준 scale 0.96↔1 로 — 앞으로 살짝 숙이는 느낌.
   cat:
     '<svg width="80px" viewBox="0 0 15.59 15.59"><path d="M14.42,11.993c-0.104-1.334-0.709-2.336-1.57-3.153c-0.479-0.449-0.906-0.563-1.414-0.563c0,0-0.204,0.005-0.041,0.212c0.215,0.271,1.791,2.328,1.768,4.011c-0.029,1.948-1.958,1.837-1.958,1.837c0.812-1.542,0.402-3.001,0.276-3.512c-0.238-0.943-0.709-1.857-1.417-2.738C9.191,6.988,8.312,6.468,7.425,6.523c-0.379-0.654-0.716-1.18-1.011-1.61C8.02,3.479,6.974,2.787,6.063,0c-0.211,0.591-0.38,1.028-0.507,1.31c-0.644-0.08-2.071-0.08-2.714,0C2.716,1.028,2.547,0.591,2.336,0C1.423,2.794,0.374,3.467,1.999,4.909c0.173,3.278,0.849,4.149,1.942,5.732c0.9,1.304,0.675,1.768,1.098,3.569c-3.197,2.014,2.223,1.241,3.063,1.2C10.266,15.305,14.777,16.6,14.42,11.993z"/></svg>',
 };
@@ -100,7 +107,8 @@ const STYLE =
   // 높이 auto — 풍경 덩어리(zoom 으로 폭 비례)가 footer 높이를 결정. 패딩 최소(분홍 창턱 여유만).
   ".skw-root{display:flex;flex-direction:column;align-items:center;" +
   "box-sizing:border-box;padding:0 0 8px;background:var(--bg);overflow:hidden}" +
-  ".skw-root .skw-window{position:relative;background:#fff;padding:10px;line-height:0}" +
+  // 창틀: 배경을 텍스트색 쪽으로 10% 섞음 — 라이트(텍스트 어두움)=배경보다 약간 진하게, 다크=약간 연하게.
+  ".skw-root .skw-window{position:relative;background:color-mix(in srgb,var(--bg),var(--fg) 10%);padding:10px;line-height:0}" +
   ".skw-root .skw-window::before{content:'';position:absolute;left:0;right:0;margin:0 auto;height:14px;" +
   "top:100%;width:112%;margin-left:-6%;background:#f4c7c7}" +
   ".skw-root .skw-cat{position:absolute;z-index:10;bottom:-5px;right:6px;color:#39342f}" +
@@ -145,7 +153,28 @@ const STYLE =
   ".skw-root .skw-time.night #skw-hill{fill:#659fcd}" +
   ".skw-root .skw-time.night #skw-land{fill:#508bb5}" +
   ".skw-root .skw-time.night .skw-tree{fill:#1c2c3b}" +
-  ".skw-root .skw-time.night .skw-trunk{fill:#3f3e3d}";
+  ".skw-root .skw-time.night .skw-trunk{fill:#3f3e3d}" +
+  // ── 상시 살랑임(ambient) — 원본 모양 유지, 미세 변형만. 안 볼 때 .skw-paused 로 정지(CPU 0). ──
+  ".skw-root.skw-paused *{animation-play-state:paused !important}" +
+  // 나무 흔들림은 SVG SMIL <animateTransform>(아래 trees SVG)로 — WebKit 은 SVG 자식 <g> 의
+  // CSS transform 애니를 무시하므로 SMIL 사용. 회전축(밑동 cx,cy)을 rotate 값에 직접 지정.
+  // 구름: 천천히 표류(안쪽 svg — div 의 phase translate 와 독립).
+  "@keyframes skw-drift{0%,100%{transform:translateX(-16px)}50%{transform:translateX(22px)}}" +
+  ".skw-clouds svg{animation:skw-drift 14s ease-in-out infinite}" +
+  // 해/달: 미세 부유(안쪽 svg).
+  "@keyframes skw-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}" +
+  ".skw-sun svg,.skw-moon svg{animation:skw-float 6s ease-in-out infinite}" +
+  // 별: 반짝임(엇갈린 위상). night 에만 보임(부모 opacity).
+  "@keyframes skw-twinkle{0%,100%{opacity:.25}50%{opacity:1}}" +
+  ".skw-stars ellipse{animation:skw-twinkle 3s ease-in-out infinite}" +
+  ".skw-stars ellipse:nth-child(2){animation-delay:-.6s;animation-duration:2.4s}" +
+  ".skw-stars ellipse:nth-child(3){animation-delay:-1.2s;animation-duration:3.4s}" +
+  ".skw-stars ellipse:nth-child(4){animation-delay:-.3s;animation-duration:2.8s}" +
+  ".skw-stars ellipse:nth-child(5){animation-delay:-1.8s}" +
+  ".skw-stars ellipse:nth-child(6){animation-delay:-.9s;animation-duration:2.2s}" +
+  // 고양이: 분리 안 함. svg 루트(CSS transform 동작)를 아래(앉은 자리) 기준 scale 0.96↔1 — 앞으로 살짝 숙이는 느낌.
+  "@keyframes skw-catbob{0%,100%{transform:scaleY(1)}50%{transform:scale(0.99,0.96)}}" +
+  ".skw-cat svg{transform-box:view-box;transform-origin:bottom center;animation:skw-catbob 3.4s ease-in-out infinite}";
 
 // 풍경(고양이 제외) — sidebar-left 탭. 고양이는 별도 cat 뷰(파일 트리 하단)로 분리.
 // 창밖 풍경 전체 — 흰 창틀 + 하늘/해/달/풍경 + 그 위에 앉은 고양이(원본 그대로).
@@ -172,6 +201,7 @@ function sceneryHtml(phase) {
 let app = null;
 let forced = null; // set 으로 강제된 phase(null = 자동 추종)
 let timer = null;
+let appFocused = true; // 코어 app.focus 신호(창 레벨) — 초기 활성 가정
 const mounts = new Set(); // 마운트된 container — 전환 시 클래스 반영
 
 function currentPhase() {
@@ -219,6 +249,26 @@ function sceneryMount(container) {
   const ro = new ResizeObserver(fit);
   ro.observe(container);
   observers.set(container, ro);
+  applyPaused(); // 갓 마운트된 뷰에도 현재 정지 상태 반영
+}
+
+// 안 볼 때 살랑임 정지(CPU 0) — .skw-paused 클래스로 animation-play-state 토글.
+let paused = false;
+function applyPaused() {
+  for (const el of mounts) {
+    const root = el.querySelector(".skw-root");
+    if (root) root.classList.toggle("skw-paused", paused); // CSS 애니(별·달·구름·고양이) 정지
+    // SMIL(나무 흔들림)은 CSS animation-play-state 로 못 멈춤 → SVG 타임라인을 직접 정지/재개.
+    el.querySelectorAll("svg").forEach((svg) => {
+      if (paused) svg.pauseAnimations && svg.pauseAnimations();
+      else svg.unpauseAnimations && svg.unpauseAnimations();
+    });
+  }
+}
+function syncPaused() {
+  // shark·벚꽃 플러그인과 동일 — 창이 안 보이거나(document.hidden) 앱이 포커스 아웃되면 정지.
+  paused = document.hidden || !appFocused;
+  applyPaused();
 }
 
 function unmount(container) {
@@ -237,6 +287,22 @@ export default {
 
     // 뷰 — 파일 트리 하단 상주(sidebar-footer). disposable 은 subscriptions 자동 수거.
     ctx.subscriptions.push(app.ui.registerView("panel", { mount: sceneryMount, unmount }));
+
+    // 안 볼 때 살랑임 정지(성능 헌법) — Page Visibility + 코어 app.focus(창 레벨, sakura 와 동일).
+    const onVis = () => syncPaused();
+    document.addEventListener("visibilitychange", onVis);
+    ctx.subscriptions.push({
+      dispose() {
+        document.removeEventListener("visibilitychange", onVis);
+      },
+    });
+    ctx.subscriptions.push(
+      app.events.on("app.focus", (p) => {
+        appFocused = !!(p && p.focused);
+        syncPaused();
+      }),
+    );
+    syncPaused();
 
     // state — 현재/자동 phase 와 다음 전환(E2E·디버그용). sok plugin.soksak-plugin-window.state
     ctx.subscriptions.push(
