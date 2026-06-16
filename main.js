@@ -97,12 +97,13 @@ const SVG = {
 };
 
 const STYLE =
-  ".skw-root{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;" +
-  "height:100%;box-sizing:border-box;padding:12px 8px;background:var(--bg);overflow:hidden}" +
+  // 높이 auto — 풍경 덩어리(zoom 으로 폭 비례)가 footer 높이를 결정. 패딩 최소(분홍 창턱 여유만).
+  ".skw-root{display:flex;flex-direction:column;align-items:center;" +
+  "box-sizing:border-box;padding:0 0 8px;background:var(--bg);overflow:hidden}" +
   ".skw-root .skw-window{position:relative;background:#fff;padding:10px;line-height:0}" +
   ".skw-root .skw-window::before{content:'';position:absolute;left:0;right:0;margin:0 auto;height:14px;" +
   "top:100%;width:112%;margin-left:-6%;background:#f4c7c7}" +
-  ".skw-root .skw-cat{position:absolute;z-index:10;bottom:-5px;right:-26px;color:#39342f}" +
+  ".skw-root .skw-cat{position:absolute;z-index:10;bottom:-5px;right:6px;color:#39342f}" +
   ".skw-root .skw-illu{position:relative;width:250px;max-width:100%;overflow:hidden}" +
   ".skw-root .skw-sky{display:block}" +
   ".skw-root .skw-mountain,.skw-root .skw-hill,.skw-root .skw-land,.skw-root .skw-trees," +
@@ -146,7 +147,9 @@ const STYLE =
   ".skw-root .skw-time.night .skw-tree{fill:#1c2c3b}" +
   ".skw-root .skw-time.night .skw-trunk{fill:#3f3e3d}";
 
-function viewHtml(phase) {
+// 풍경(고양이 제외) — sidebar-left 탭. 고양이는 별도 cat 뷰(파일 트리 하단)로 분리.
+// 창밖 풍경 전체 — 흰 창틀 + 하늘/해/달/풍경 + 그 위에 앉은 고양이(원본 그대로).
+function sceneryHtml(phase) {
   return (
     "<style>" + STYLE + "</style>" +
     '<div class="skw-root"><div class="skw-window">' +
@@ -197,13 +200,34 @@ function schedule() {
   }, nextTransitionMs(new Date()) + 250);
 }
 
-function mount(container) {
-  container.innerHTML = viewHtml(currentPhase());
+const observers = new Map(); // container → ResizeObserver(반응형 정리용)
+
+// 창밖 풍경(고양이+창틀+풍경 한 덩어리) — phase 전환 + 사이드바 폭 반응형.
+// .skw-window 에 zoom → 고양이(absolute)까지 통째로 비례. zoom 은 transform 과 달리
+// 리플로우하므로 footer 슬롯 높이가 줌된 풍경 높이를 자연히 따라간다(빈 공간/잘림 없음).
+const BASE_W = 270; // 풍경 자연 폭(250 illu + 창틀 padding) — 이 폭에서 zoom=1.
+function sceneryMount(container) {
+  container.innerHTML = sceneryHtml(currentPhase());
   mounts.add(container);
+  const win = container.querySelector(".skw-window");
+  const fit = () => {
+    if (!win) return;
+    const w = container.clientWidth;
+    if (w > 0) win.style.zoom = Math.max(0.3, Math.min(w / BASE_W, 2)).toFixed(3);
+  };
+  fit();
+  const ro = new ResizeObserver(fit);
+  ro.observe(container);
+  observers.set(container, ro);
 }
 
 function unmount(container) {
   mounts.delete(container);
+  const ro = observers.get(container);
+  if (ro) {
+    ro.disconnect();
+    observers.delete(container);
+  }
   container.replaceChildren();
 }
 
@@ -211,8 +235,8 @@ export default {
   activate(ctx) {
     app = ctx.app;
 
-    // 뷰 — 좌측 사이드바(매니페스트 placements). disposable 은 subscriptions 자동 수거.
-    ctx.subscriptions.push(app.ui.registerView("panel", { mount, unmount }));
+    // 뷰 — 파일 트리 하단 상주(sidebar-footer). disposable 은 subscriptions 자동 수거.
+    ctx.subscriptions.push(app.ui.registerView("panel", { mount: sceneryMount, unmount }));
 
     // state — 현재/자동 phase 와 다음 전환(E2E·디버그용). sok plugin.soksak-plugin-window.state
     ctx.subscriptions.push(
@@ -263,9 +287,12 @@ export default {
       dispose() {
         if (timer != null) clearTimeout(timer);
         timer = null;
+        for (const ro of observers.values()) ro.disconnect();
+        observers.clear();
         mounts.clear();
         app = null;
       },
+
     });
   },
 
