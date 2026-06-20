@@ -1,4 +1,4 @@
-# Window View (soksak-plugin-window)
+# Window View (soksak-plugin-sidebar-sky)
 
 Shows a **window scene** at the bottom of the left sidebar. Inside a white frame, sky, sun, moon,
 stars, clouds, mountains, hills, ground, and trees change with the **current time** — the sun
@@ -26,11 +26,11 @@ The current time is read from the local `Date`; no network or storage permission
 ## Commands (auto-exposed via CLI/MCP)
 
 ```bash
-sok plugin.soksak-plugin-window.state
+sok plugin.soksak-plugin-sidebar-sky.state
 # → { phase, forced, auto, now, nextPhase, nextInMs }
 
-sok plugin.soksak-plugin-window.set '{"phase":"night"}'   # force (preview/verification)
-sok plugin.soksak-plugin-window.set '{}'                  # return to automatic tracking
+sok plugin.soksak-plugin-sidebar-sky.set '{"phase":"night"}'   # force (preview/verification)
+sok plugin.soksak-plugin-sidebar-sky.set '{}'                  # return to automatic tracking
 ```
 
 ## Performance

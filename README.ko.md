@@ -1,4 +1,4 @@
-# 창밖 풍경 (soksak-plugin-window)
+# 창밖 풍경 (soksak-plugin-sidebar-sky)
 
 좌측 사이드바 하단에 **창밖 풍경**을 띄운다. 흰 액자 안의 하늘·해·달·별·구름·산·언덕·땅·나무가
 **현재 시각**을 따라 변한다 — 아침엔 해가 뜨고, 저녁엔 노을이 지고, 밤엔 달과 별이 뜬다.
@@ -25,11 +25,11 @@
 ## 명령 (CLI/MCP 자동 노출)
 
 ```bash
-sok plugin.soksak-plugin-window.state
+sok plugin.soksak-plugin-sidebar-sky.state
 # → { phase, forced, auto, now, nextPhase, nextInMs }
 
-sok plugin.soksak-plugin-window.set '{"phase":"night"}'   # 강제(미리보기/검증)
-sok plugin.soksak-plugin-window.set '{}'                  # 자동 추종 복귀
+sok plugin.soksak-plugin-sidebar-sky.set '{"phase":"night"}'   # 강제(미리보기/검증)
+sok plugin.soksak-plugin-sidebar-sky.set '{}'                  # 자동 추종 복귀
 ```
 
 ## 성능

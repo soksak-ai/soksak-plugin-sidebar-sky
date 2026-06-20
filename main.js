@@ -1,4 +1,4 @@
-// soksak-plugin-window — 좌측 사이드바 하단의 "창밖 풍경" (soksak-plugin-spec v1).
+// soksak-plugin-sidebar-sky — 좌측 사이드바 하단의 "창밖 풍경" (soksak-plugin-spec v1).
 //
 // 원작: oliviale (Olivia Ng) 의 CodePen "CSS Animations Experiment Part II"
 //   https://codepen.io/oliviale/pen/ELPvLM  (라이선스는 원본 CodePen 을 따름 — 크레딧 유지).
@@ -304,7 +304,7 @@ export default {
     );
     syncPaused();
 
-    // state — 현재/자동 phase 와 다음 전환(E2E·디버그용). sok plugin.soksak-plugin-window.state
+    // state — 현재/자동 phase 와 다음 전환(E2E·디버그용). sok plugin.soksak-plugin-sidebar-sky.state
     ctx.subscriptions.push(
       app.commands.register("state", {
         description: "현재 시간대 상태와 다음 전환 시각을 돌려준다",

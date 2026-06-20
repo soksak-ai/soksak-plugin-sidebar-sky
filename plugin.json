@@ -1,12 +1,12 @@
 {
   "spec": "soksak-spec-plugin@0.0.1",
-  "id": "soksak-plugin-window",
+  "id": "soksak-plugin-sidebar-sky",
   "name": {
     "ko": "창밖 풍경",
     "en": "Window"
   },
   "version": "0.0.1",
-  "repo": "https://github.com/soksak-ai/soksak-plugin-window.git",
+  "repo": "https://github.com/soksak-ai/soksak-plugin-sidebar-sky.git",
   "description": {
     "ko": "좌측 사이드바 하단의 창밖 풍경 — 시간대에 따라 변하고, 나무가 흔들리고 낮엔 구름이 흐르며 밤엔 별이 반짝인다.",
     "en": "A window to the sky in the left sidebar — shifts with the time of day; trees sway, clouds drift by day, stars twinkle at night."
