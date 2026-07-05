@@ -309,6 +309,7 @@ export default {
       app.commands.register("state", {
         description: "현재 시간대 상태와 다음 전환 시각을 돌려준다",
         params: {},
+        message: (d) => `현재 시간대는 ${d.phase}, 다음은 ${d.nextPhase}입니다.`,
         handler: () => {
           const now = new Date();
           const ms = nextTransitionMs(now);
@@ -335,6 +336,10 @@ export default {
             required: false,
           },
         },
+        message: (d) =>
+          d.forced
+            ? `시간대를 ${d.phase}로 강제했습니다.`
+            : `자동 추종으로 복귀했습니다 (현재 ${d.phase}).`,
         handler: (p) => {
           const v = p && p.phase;
           if (v != null && v !== "" && !PHASES.includes(v)) {
