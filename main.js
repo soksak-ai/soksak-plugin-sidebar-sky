@@ -310,6 +310,10 @@ export default {
         description: "현재 시간대 상태와 다음 전환 시각을 돌려준다",
         params: {},
         message: (d) => `현재 시간대는 ${d.phase}, 다음은 ${d.nextPhase}입니다.`,
+        hint: (d) =>
+          d.forced
+            ? [{ cmd: "set", why: "자동 추종으로 되돌릴 수 있습니다." }]
+            : [{ cmd: "set", why: "특정 시간대로 강제해 미리볼 수 있습니다." }],
         handler: () => {
           const now = new Date();
           const ms = nextTransitionMs(now);
@@ -340,6 +344,13 @@ export default {
           d.forced
             ? `시간대를 ${d.phase}로 강제했습니다.`
             : `자동 추종으로 복귀했습니다 (현재 ${d.phase}).`,
+        hint: (d) =>
+          d.forced
+            ? [
+                { cmd: "state", why: "강제된 상태를 확인할 수 있습니다." },
+                { cmd: "set", why: "인자 없이 호출하면 자동 추종으로 되돌릴 수 있습니다." },
+              ]
+            : [{ cmd: "state", why: "자동 추종 상태를 확인할 수 있습니다." }],
         handler: (p) => {
           const v = p && p.phase;
           if (v != null && v !== "" && !PHASES.includes(v)) {
