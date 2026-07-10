@@ -30,6 +30,15 @@ export function phaseForTime(date) {
   return phase;
 }
 
+// 클릭 순회 순서 — 창을 누를 때마다 자동 → day → sunset → dusk → night → 자동…
+// set 커맨드의 phase 강제 로직과 동일 상태를 태운다(단일 진실: setForced). 순수 함수라 노출/테스트한다.
+export function nextForced(forced) {
+  if (forced == null) return PHASES[0]; // 자동 추종 → 첫 강제(day)
+  const i = PHASES.indexOf(forced);
+  if (i < 0 || i === PHASES.length - 1) return null; // 마지막(night) 또는 미지값 → 자동 복귀
+  return PHASES[i + 1];
+}
+
 // 다음 경계까지 ms(분/초/ms 정밀). 오늘 남은 경계가 없으면 익일 첫 경계(07:00)까지.
 export function nextTransitionMs(date) {
   const ms =
@@ -204,6 +213,11 @@ let timer = null;
 let appFocused = true; // 코어 app.focus 신호(창 레벨) — 초기 활성 가정
 const mounts = new Set(); // 마운트된 container — 전환 시 클래스 반영
 
+// 사람 표면 문자열 — locale 해소(app.locale, docs/I18N.md). ko 외 locale 은 en 폴백.
+function loc(en, ko) {
+  return (typeof app?.locale === "function" ? app.locale() : "ko") === "ko" ? ko : en;
+}
+
 function currentPhase() {
   return forced ?? phaseForTime(new Date());
 }
@@ -214,6 +228,14 @@ function applyPhase() {
     const t = el.querySelector(".skw-time");
     if (t) t.className = "skw-time " + phase;
   }
+}
+
+// phase 강제/복귀 단일 진실 — set 커맨드와 창 클릭이 같은 경로를 탄다.
+function setForced(v) {
+  forced = v ? v : null;
+  applyPhase();
+  schedule();
+  return { phase: currentPhase(), forced: forced != null };
 }
 
 function schedule() {
@@ -240,6 +262,20 @@ function sceneryMount(container) {
   container.innerHTML = sceneryHtml(currentPhase());
   mounts.add(container);
   const win = container.querySelector(".skw-window");
+  // C2 투명성 — 창 자체를 조작 노드로 노출(contributes.nodes=cycle). ui.tree 에 뜨고
+  // ui.input.click 이 도달해 시간대를 순회한다(자동↔강제, setForced 단일 진실).
+  if (win) {
+    win.dataset.node = "cycle";
+    win.style.cursor = "pointer";
+    win.setAttribute("role", "button");
+    win.setAttribute("tabindex", "0");
+    win.setAttribute("title", loc("Click to preview time of day", "클릭하면 시간대를 미리봅니다"));
+    win.setAttribute(
+      "aria-label",
+      loc("Window scene — click to cycle time of day", "창밖 풍경 — 클릭해 시간대 순환"),
+    );
+    win.addEventListener("click", () => setForced(nextForced(forced)));
+  }
   const fit = () => {
     if (!win) return;
     const w = container.clientWidth;
@@ -356,10 +392,7 @@ export default {
           if (v != null && v !== "" && !PHASES.includes(v)) {
             throw new Error(`phase 는 ${PHASES.join("|")} 또는 생략(자동 복귀)`);
           }
-          forced = v ? v : null;
-          applyPhase();
-          schedule();
-          return { phase: currentPhase(), forced: forced != null };
+          return setForced(v);
         },
       }),
     );

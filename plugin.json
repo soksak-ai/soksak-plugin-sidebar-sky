@@ -30,6 +30,15 @@
         ]
       }
     ],
+    "nodes": [
+      {
+        "id": "cycle",
+        "description": {
+          "ko": "창밖 풍경(클릭=시간대 순환 day→sunset→dusk→night→자동)",
+          "en": "The window scene (click = cycle time of day day→sunset→dusk→night→auto)"
+        }
+      }
+    ],
     "commands": [
       {
         "name": "state",
