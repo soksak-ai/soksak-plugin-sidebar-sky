@@ -2,14 +2,13 @@
   "spec": "soksak-spec-plugin@0.0.1",
   "id": "soksak-plugin-sidebar-sky",
   "name": {
-    "ko": "창밖 풍경",
+    "ko": "\ucc3d\ubc16 \ud48d\uacbd",
     "en": "Window"
   },
   "version": "0.0.1",
-  "repo": "https://github.com/soksak-ai/soksak-plugin-sidebar-sky.git",
   "description": {
-    "ko": "좌측 사이드바 하단의 창밖 풍경 — 시간대에 따라 변하고, 나무가 흔들리고 낮엔 구름이 흐르며 밤엔 별이 반짝인다.",
-    "en": "A window to the sky in the left sidebar — shifts with the time of day; trees sway, clouds drift by day, stars twinkle at night."
+    "ko": "\uc88c\uce21 \uc0ac\uc774\ub4dc\ubc14 \ud558\ub2e8\uc758 \ucc3d\ubc16 \ud48d\uacbd \u2014 \uc2dc\uac04\ub300\uc5d0 \ub530\ub77c \ubcc0\ud558\uace0, \ub098\ubb34\uac00 \ud754\ub4e4\ub9ac\uace0 \ub0ae\uc5d4 \uad6c\ub984\uc774 \ud750\ub974\uba70 \ubc24\uc5d4 \ubcc4\uc774 \ubc18\uc9dd\uc778\ub2e4.",
+    "en": "A window to the sky in the left sidebar \u2014 shifts with the time of day; trees sway, clouds drift by day, stars twinkle at night."
   },
   "entry": "main.js",
   "permissions": [
@@ -21,10 +20,10 @@
       {
         "id": "panel",
         "title": {
-          "ko": "창밖 풍경",
+          "ko": "\ucc3d\ubc16 \ud48d\uacbd",
           "en": "Window"
         },
-        "icon": "☼",
+        "icon": "\u263c",
         "placements": [
           "sidebar-footer"
         ]
@@ -34,8 +33,8 @@
       {
         "id": "cycle",
         "description": {
-          "ko": "창밖 풍경(클릭=시간대 순환 day→sunset→dusk→night→자동)",
-          "en": "The window scene (click = cycle time of day day→sunset→dusk→night→auto)"
+          "ko": "\ucc3d\ubc16 \ud48d\uacbd(\ud074\ub9ad=\uc2dc\uac04\ub300 \uc21c\ud658 day\u2192sunset\u2192dusk\u2192night\u2192\uc790\ub3d9)",
+          "en": "The window scene (click = cycle time of day day\u2192sunset\u2192dusk\u2192night\u2192auto)"
         }
       }
     ],
@@ -43,14 +42,14 @@
       {
         "name": "state",
         "title": {
-          "ko": "현재 시간대 상태",
+          "ko": "\ud604\uc7ac \uc2dc\uac04\ub300 \uc0c1\ud0dc",
           "en": "Time-of-day state"
         }
       },
       {
         "name": "set",
         "title": {
-          "ko": "시간대 강제/복귀",
+          "ko": "\uc2dc\uac04\ub300 \uac15\uc81c/\ubcf5\uadc0",
           "en": "Force / clear phase"
         }
       }
