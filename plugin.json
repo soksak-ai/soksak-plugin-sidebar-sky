@@ -25,7 +25,7 @@
         },
         "icon": "\u263c",
         "placements": [
-          "sidebar-footer"
+          "rail-footer"
         ]
       }
     ],
